@@ -23,9 +23,9 @@ public class StatisticsDisplay : MonoBehaviour
         currencyTextObjectText = currencyTextObject.GetComponent<Text>();
         currentLvlTextObjectText = currentLvlTextObject.GetComponent<Text>();
 
-        tapCountTextObjectText.text = statistic.GetComponent<Statistics>().tapCount.ToString();
-        currencyTextObjectText.text = statistic.GetComponent<Statistics>().currency.ToString();
-        currentLvlTextObjectText.text = statistic.GetComponent<Statistics>().currentLvlDificult.ToString().Split('.')[0];
+        tapCountTextObjectText.text = BigNumberDisplay.ConvertNumber(statistic.GetComponent<Statistics>().tapCount,1);
+        currencyTextObjectText.text = BigNumberDisplay.ConvertNumber(statistic.GetComponent<Statistics>().currency,1);
+        currentLvlTextObjectText.text = BigNumberDisplay.ConvertNumber(statistic.GetComponent<Statistics>().currentLvlDificult,1);
         encounterSliderObject.GetComponent<Slider>().maxValue = (float)statistic.GetComponent<Statistics>().currentLvlDificult;
 
         Statistics.UpdateCurrencyEvent += this.OnUpdateCurrency;
@@ -41,17 +41,17 @@ public class StatisticsDisplay : MonoBehaviour
     public void OnUpdateTapCount()
     {
         encounterSliderObject.GetComponent<Slider>().value = (float)statistic.GetComponent<Statistics>().tapCount;
-        tapCountTextObjectText.text = statistic.GetComponent<Statistics>().tapCount.ToString();
+        tapCountTextObjectText.text = BigNumberDisplay.ConvertNumber(statistic.GetComponent<Statistics>().tapCount,1);
     }
 
     public void OnUpdateCurrency()
     {
-        currencyTextObjectText.text = statistic.GetComponent<Statistics>().currency.ToString();
+        currencyTextObjectText.text = BigNumberDisplay.ConvertNumber(statistic.GetComponent<Statistics>().currency,1);
     }
     public void OnUpdateLvlDifficult()
     {
         encounterSliderObject.GetComponent<Slider>().maxValue = (float)statistic.GetComponent<Statistics>().currentLvlDificult;
-        currentLvlTextObjectText.text = statistic.GetComponent<Statistics>().currentLvlDificult.ToString().Split('.')[0];
+        currentLvlTextObjectText.text = BigNumberDisplay.ConvertNumber(statistic.GetComponent<Statistics>().currentLvlDificult, 1);
     }
 
     void OnApplicationQuit()
